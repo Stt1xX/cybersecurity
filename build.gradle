@@ -39,15 +39,12 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-import com.github.spotbugs.snom.Effort
-import com.github.spotbugs.snom.Confidence
 spotbugs {
     toolVersion = '4.8.4'
-    effort = Effort.MAX
+    effort = com.github.spotbugs.snom.Effort.MAX
 }
 
 tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach {
-    reportLevel = Confidence.LOW
     reports.create('html') {
         required = true
         outputLocation = file("$buildDir/reports/spotbugs/${name}.html")

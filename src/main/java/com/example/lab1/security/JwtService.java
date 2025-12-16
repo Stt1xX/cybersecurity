@@ -14,7 +14,7 @@ import java.time.Instant;
 import java.util.Date;
 
 @Component
-public class JwtService {
+public final class JwtService {
     private final Key key;
     private final long expirationSeconds;
 
@@ -27,10 +27,10 @@ public class JwtService {
     public String generateToken(String username, String role) {
         Instant now = Instant.now();
         return Jwts.builder()
-                .setSubject(username)
+                .subject(username)
                 .claim("role", role)
-                .setIssuedAt(Date.from(now))
-                .setExpiration(Date.from(now.plusSeconds(expirationSeconds)))
+                .issuedAt(Date.from(now))
+                .expiration(Date.from(now.plusSeconds(expirationSeconds)))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }

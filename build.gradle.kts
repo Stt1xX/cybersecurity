@@ -55,14 +55,9 @@ spotbugs {
 
 tasks.withType<com.github.spotbugs.snom.SpotBugsTask>().configureEach {
     reports {
-        create("xml") {
+        create("html") {
             required.set(true)
-            outputLocation.set(layout.buildDirectory.file("reports/spotbugs/${name.removePrefix("spotbugs") .lowercase()}/spotbugs.xml"))
-        }
-
-        create("sarif") {
-            required.set(true)
-            outputLocation.set(layout.buildDirectory.file("reports/spotbugs/${name.removePrefix("spotbugs").lowercase()}/spotbugs.sarif"))
+            outputLocation.set(layout.buildDirectory.file("reports/spotbugs/${name.removePrefix("spotbugs").lowercase()}/spotbugs.html"))
         }
     }
 }

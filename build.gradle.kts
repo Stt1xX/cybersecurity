@@ -1,6 +1,6 @@
 plugins {
     java
-    id("org.springframework.boot") version "3.5.5"
+    id("org.springframework.boot") version "4.0.0"
     id("io.spring.dependency-management") version "1.1.7"
     id("com.github.spotbugs") version "6.0.20"
 }
@@ -63,3 +63,20 @@ tasks.withType<com.github.spotbugs.snom.SpotBugsTask>().configureEach {
 }
 
 tasks.check { dependsOn("spotbugsMain") }
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.owasp:dependency-check-gradle:12.1.9")
+    }
+}
+
+apply(plugin = "org.owasp.dependencycheck")
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:4.0.0")
+    }
+}
